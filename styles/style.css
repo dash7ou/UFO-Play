@@ -1,0 +1,11 @@
+body {
+    background-image: url(../images/background.jpg)
+}
+
+#ufoCanves {
+    border: 2px solid black;
+    margin: 0 auto;
+    display: block;
+    background-image: url(../images/field-background.jpg);
+    background-size: 100% 100%;
+}
