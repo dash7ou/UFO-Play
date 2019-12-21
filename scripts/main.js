@@ -100,7 +100,7 @@ play.start()
 
 function gameLoop(play) {
     // last item in the positionContainer
-    let presentPosition = play.presentPosition;
+    let presentPosition = play.presentPosition();
 
     if (presentPosition) {
         //update
