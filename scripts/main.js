@@ -44,7 +44,8 @@ class GameBasics {
 
         this.setting = {
             //FBS: 60 frame per 1 second, this mean 1 frame in every 0.0166667 seconds
-            updateSeconds: (1 / 60)
+            updateSeconds: (1 / 60),
+            spaceshipSpeed: 300
         }
 
         // we collect here the different position, states of the game
