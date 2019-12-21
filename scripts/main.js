@@ -1,6 +1,6 @@
 const canvas = document.getElementById("ufoCanves");
 canvas.width = 900;
-canvas.height = 600;
+canvas.height = 750;
 const ctx = canvas.getContext('2d');
 
 
@@ -87,8 +87,9 @@ class GameBasics {
 
     start() {
         setInterval(() => {
-            gameLoop()
+            gameLoop(play)
         }, this.setting.updateSeconds * 1000);
+        // go into opening position
         this.goToPosition(new OpeningPosition());
     }
 }
