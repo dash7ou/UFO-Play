@@ -30,4 +30,14 @@ class OpeningPosition {
         ctx.fillText("Created By: DASHZOU", play.width / 3, play.height / 2 + 360)
         ctx.fillText("Github: @dash7ou", play.width / 1.5, play.height / 2 + 360)
     }
+
+    keyDown(play, keyboardKey) {
+        if (keyboardKey === 32) {
+            play.level = 1;
+            play.score = 0;
+            play.shields = 2;
+
+            play.goToPosition(new TransferPosition(play.level));
+        }
+    }
 }

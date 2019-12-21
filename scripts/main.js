@@ -37,6 +37,11 @@ class GameBasics {
             right: 800 //from top of left
         };
 
+        // initial value
+        this.level = 1;
+        this.score = 0;
+        this.shields = 2; //chance to end the game
+
         this.setting = {
             //FBS: 60 frame per 1 second, this mean 1 frame in every 0.0166667 seconds
             updateSeconds: (1 / 60)
@@ -52,6 +57,10 @@ class GameBasics {
          * 5. positionGameOver
          */
         this.positionContainer = []
+
+        // pressed keys storing
+        this.pressedKeys = {};
+
     }
 
     // Return current game position, status. Always returns the top element of positionContainer.
@@ -92,11 +101,26 @@ class GameBasics {
         // go into opening position
         this.goToPosition(new OpeningPosition());
     }
+
+    // Notified a game when the key pressed
+    keyDown(keyboardCode) {
+        // store the pressed key in "pressedKey"
+        this.pressedKeys[keyboardCode] = true;
+
+        // it calls the present positions keyDown function
+        if (this.presentPosition() && this.presentPosition().keyDown) {
+            this.presentPosition().keyDown(this, keyboardCode);
+        }
+
+    }
+
+    // Notified a game when a key is released
+    keyUp(keyboardCode) {
+        // delete
+        delete this.pressedKeys[keyboardCode]
+    }
 }
 
-
-const play = new GameBasics(canvas);
-play.start()
 
 
 function gameLoop(play) {
@@ -116,3 +140,24 @@ function gameLoop(play) {
         }
     }
 }
+
+
+// keyboard event listening
+window.addEventListener("keydown", function (e) {
+    const keyboardCode = e.which || event.keyCode; // Use either which or keyCode, depending on browser 
+    if (keyboardCode === 37 || keyboardCode === 39 || keyboardCode === 32) { // space / left / right
+        e.preventDefault();
+    }
+
+    play.keyDown(keyboardCode);
+})
+
+
+window.addEventListener("keyup", function (e) {
+    const keyboardCode = e.which || event.keyCode; // Use either which or keyCode, depending on browser
+    play.keyUp(keyboardCode);
+})
+
+
+const play = new GameBasics(canvas);
+play.start()
